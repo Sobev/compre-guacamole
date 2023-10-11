@@ -1,8 +1,10 @@
 ## Getting Started
 Retrieval Augmented Generation (RAG) AI
 
+
 an api server interact with vector database(qdrant) and cloudflare workers ai.
 it's a backend server for [click here](https://github.com/Sobev/compre-lamp)
+it's using Cloudflare Workers AI Restful Api to generate response
 
 [more details](https://github.com/Sobev/compre-lamp)
 
