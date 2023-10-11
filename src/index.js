@@ -112,9 +112,14 @@ app.post("/qd/ap/t", async (c) => {
     throw new Error(`failed to create new collection`);
   }
   const text = await c.req.text();
-  const textArr = text.split("\r\n\r\n");
+  const textArr = text.split("\n");
+  console.log("split text to: " + textArr.length)
   const aid = uuidv4();
   for (const i in textArr) {
+    if(textArr[i] == '') {
+      console.log("empty text, continue!!!")
+      continue;
+    }
     const cfEmb = await getEmbeddings(c, textArr[i]);
     console.log(cfEmb.success);
     if (cfEmb.success === false) {
@@ -137,11 +142,15 @@ app.post("/qd/ap/t", async (c) => {
     const qres = await addPoint(process.env.VECTOR_COLLECTION, point);
     console.log("qres: " + qres);
   }
-  return c.json({ aid });
+  return c.json({ 
+    success: true,
+    aid: aid
+  });
 });
 
 app.post("/qd/sch", async (c) => {
-  const { text, aid } = await c.req.json();
+  const { pre_text, aid } = await c.req.json();
+  const text = "find correct in ABCD, you can return max 2 correct answers.\n " + pre_text; 
   if (aid == null || aid === "") {
     throw new Error(`aid can not be null or empty`);
   }
