@@ -149,8 +149,8 @@ app.post("/qd/ap/t", async (c) => {
 });
 
 app.post("/qd/sch", async (c) => {
-  const { pre_text, aid } = await c.req.json();
-  const text = "find correct in ABCD, you can return max 2 correct answers.\n " + pre_text; 
+  const { text, aid } = await c.req.json();
+  const textWithQuestion = "find correct answer in ABCD." + text; 
   if (aid == null || aid === "") {
     throw new Error(`aid can not be null or empty`);
   }
@@ -167,7 +167,7 @@ app.post("/qd/sch", async (c) => {
 
   const notes = res.map((r) => r.payload.text);
   // console.log(JSON.stringify(notes))
-  const llama_res = await llama_assist(c, notes, text);
+  const llama_res = await llama_assist(c, notes, textWithQuestion);
   return c.json(llama_res);
 });
 
