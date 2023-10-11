@@ -6,6 +6,8 @@ an api server interact with vector database(qdrant) and cloudflare workers ai.
 it's a backend server for [click here](https://github.com/Sobev/compre-lamp)
 it's using Cloudflare Workers AI Restful Api to generate response
 
+example
+![](https://i.imgur.com/qYg06nL.png)
 [more details](https://github.com/Sobev/compre-lamp)
 
 ## How to Use
